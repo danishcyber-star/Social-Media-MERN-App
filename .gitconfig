@@ -1,0 +1,6 @@
+[user]
+	email = danishcv7@gmail.com
+	name = danishcyber-star
+[http]
+	postBuffer = 524288000
+	version = HTTP/1.1

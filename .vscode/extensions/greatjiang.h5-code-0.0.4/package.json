@@ -1,0 +1,45 @@
+{
+	"name": "h5-code",
+	"displayName": "h5-code",
+	"description": "h5 page common code snippets",
+	"version": "0.0.4",
+	"publisher": "greatjiang",
+	"repository": "https://github.com/greatjiang/h5-code",
+	"engines": {
+		"vscode": "^1.29.0"
+	},
+	"categories": [
+		"Snippets"
+	],
+	"keywords": [
+		"h5",
+		"snippets"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "javascript",
+				"path": "./snippets/js-snippets.json"
+			},
+			{
+				"language": "html",
+				"path": "./snippets/html-snippets.json"
+			},
+			{
+				"language": "css",
+				"path": "./snippets/css-snippets.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "f4830402-69fc-4702-be1b-0d7c9e0da862",
+		"publisherId": "d6417eaa-d37d-4021-a3b8-e3bf891e7731",
+		"publisherDisplayName": "greatjiang",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1666627900576,
+		"preRelease": false
+	}
+}

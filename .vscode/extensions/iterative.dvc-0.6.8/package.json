@@ -1,0 +1,1677 @@
+{
+	"name": "dvc",
+	"private": true,
+	"preview": false,
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"publisher": "iterative",
+	"icon": "docs/dvc.png",
+	"extensionDependencies": [
+		"vscode.git"
+	],
+	"version": "0.6.8",
+	"license": "Apache-2.0",
+	"readme": "./README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/iterative/vscode-dvc"
+	},
+	"bugs": "https://github.com/iterative/vscode-dvc",
+	"homepage": "https://github.com/iterative/vscode-dvc#readme",
+	"keywords": [
+		"iterative",
+		"data version control",
+		"plots",
+		"experiment tracking",
+		"hyperparameters",
+		"dataset",
+		"dvc"
+	],
+	"categories": [
+		"Machine Learning",
+		"Data Science",
+		"Visualization",
+		"SCM Providers"
+	],
+	"galleryBanner": {
+		"color": "#333",
+		"theme": "dark"
+	},
+	"engines": {
+		"vscode": "^1.64.0",
+		"node": ">=16.13.0"
+	},
+	"activationEvents": [
+		"onStartupFinished",
+		"workspaceContains:**/*dvc*"
+	],
+	"main": "./dist/extension.js",
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": false,
+			"description": "This extension depends on the vscode.git extension, which is disabled in Restricted Mode."
+		}
+	},
+	"contributes": {
+		"colors": [
+			{
+				"id": "dvc.deps",
+				"description": "Color to indicate a DVC dep column in the experiments table",
+				"defaults": {
+					"dark": "#b079e7",
+					"light": "#4f1886"
+				}
+			},
+			{
+				"id": "dvc.metrics",
+				"description": "Color to indicate a DVC metric column in the experiments table",
+				"defaults": {
+					"dark": "#fbd38d",
+					"light": "#714904"
+				}
+			},
+			{
+				"id": "dvc.params",
+				"description": "Color to indicate a DVC param column in the experiments table",
+				"defaults": {
+					"dark": "#90cdf4",
+					"light": "#0b496f"
+				}
+			},
+			{
+				"id": "dvc.workspaceChanged",
+				"description": "Color used in the experiments table to highlight a value in the workspace that differs from the latest committed value",
+				"defaults": {
+					"dark": "gitDecoration.modifiedResourceForeground",
+					"light": "gitDecoration.modifiedResourceForeground"
+				}
+			}
+		],
+		"commands": [
+			{
+				"title": "%command.addExperimentsTableFilter%",
+				"command": "dvc.addExperimentsTableFilter",
+				"category": "DVC",
+				"icon": "$(add)"
+			},
+			{
+				"title": "%command.addExperimentsTableSort%",
+				"command": "dvc.addExperimentsTableSort",
+				"category": "DVC",
+				"icon": "$(add)"
+			},
+			{
+				"title": "%command.addStarredExperimentsTableFilter%",
+				"command": "dvc.addStarredExperimentsTableFilter",
+				"category": "DVC",
+				"icon": "$(star-full)"
+			},
+			{
+				"title": "%command.addStarredExperimentsTableSort%",
+				"command": "dvc.addStarredExperimentsTableSort",
+				"category": "DVC",
+				"icon": "$(star-full)"
+			},
+			{
+				"title": "%command.addStudioAccessToken%",
+				"command": "dvc.addStudioAccessToken",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.addTarget%",
+				"command": "dvc.addTarget",
+				"category": "DVC",
+				"icon": "$(add)"
+			},
+			{
+				"title": "%command.applyExperiment%",
+				"command": "dvc.applyExperiment",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.branchExperiment%",
+				"command": "dvc.branchExperiment",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.checkout%",
+				"command": "dvc.checkout",
+				"category": "DVC",
+				"icon": "$(discard)"
+			},
+			{
+				"title": "%command.checkCLICompatible%",
+				"command": "dvc.checkCLICompatible",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.checkoutTarget%",
+				"command": "dvc.checkoutTarget",
+				"category": "DVC",
+				"icon": "$(discard)"
+			},
+			{
+				"title": "%command.commit%",
+				"command": "dvc.commit",
+				"category": "DVC",
+				"icon": "$(check)"
+			},
+			{
+				"title": "%command.commitTarget%",
+				"command": "dvc.commitTarget",
+				"category": "DVC",
+				"icon": "$(check)"
+			},
+			{
+				"title": "%command.compareSelected%",
+				"command": "dvc.compareSelected",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.copyFilePath%",
+				"command": "dvc.copyFilePath",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.copyRelativeFilePath%",
+				"command": "dvc.copyRelativeFilePath",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.deleteTarget%",
+				"command": "dvc.deleteTarget",
+				"category": "DVC",
+				"icon": "$(trash)"
+			},
+			{
+				"title": "%command.discardWorkspaceChanges%",
+				"command": "dvc.discardWorkspaceChanges",
+				"category": "DVC",
+				"icon": "$(discard)"
+			},
+			{
+				"title": "%command.experimentGarbageCollect%",
+				"command": "dvc.experimentGarbageCollect",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.findInFolder%",
+				"command": "dvc.findInFolder",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.getStarted%",
+				"command": "dvc.getStarted",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.gitStageAll%",
+				"command": "dvc.gitStageAll",
+				"category": "DVC",
+				"icon": "$(add)"
+			},
+			{
+				"title": "%command.gitUnstageAll%",
+				"command": "dvc.gitUnstageAll",
+				"category": "DVC",
+				"icon": "$(remove)"
+			},
+			{
+				"title": "%command.init%",
+				"command": "dvc.init",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.moveTargets%",
+				"command": "dvc.moveTargets",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.openToTheSide%",
+				"command": "dvc.openToTheSide",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.pull%",
+				"command": "dvc.pull",
+				"category": "DVC",
+				"icon": "$(cloud-download)"
+			},
+			{
+				"title": "%command.pullTarget%",
+				"command": "dvc.pullTarget",
+				"category": "DVC",
+				"icon": "$(cloud-download)"
+			},
+			{
+				"title": "%command.push%",
+				"command": "dvc.push",
+				"category": "DVC",
+				"icon": "$(cloud-upload)"
+			},
+			{
+				"title": "%command.pushTarget%",
+				"command": "dvc.pushTarget",
+				"category": "DVC",
+				"icon": "$(cloud-upload)"
+			},
+			{
+				"title": "%command.modifyExperimentParamsAndQueue%",
+				"command": "dvc.modifyExperimentParamsAndQueue",
+				"category": "DVC",
+				"icon": {
+					"dark": "resources/dark/queue-experiment.svg",
+					"light": "resources/light/queue-experiment.svg"
+				}
+			},
+			{
+				"title": "%command.modifyExperimentParamsAndResume%",
+				"command": "dvc.modifyExperimentParamsAndResume",
+				"category": "DVC",
+				"icon": "$(debug-continue-small)"
+			},
+			{
+				"title": "%command.modifyExperimentParamsAndRun%",
+				"command": "dvc.modifyExperimentParamsAndRun",
+				"category": "DVC",
+				"icon": "$(play)"
+			},
+			{
+				"title": "%command.modifyExperimentParamsResetAndRun%",
+				"command": "dvc.modifyExperimentParamsResetAndRun",
+				"category": "DVC",
+				"icon": "$(play)"
+			},
+			{
+				"title": "%command.queueExperiment%",
+				"command": "dvc.queueExperiment",
+				"category": "DVC",
+				"icon": {
+					"dark": "resources/dark/queue-experiment.svg",
+					"light": "resources/light/queue-experiment.svg"
+				}
+			},
+			{
+				"title": "%command.removeExperiments%",
+				"command": "dvc.removeExperiments",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.removeExperimentQueue%",
+				"command": "dvc.removeExperimentQueue",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.removeExperimentsTableFilters%",
+				"command": "dvc.removeExperimentsTableFilters",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.removeExperimentsTableSorts%",
+				"command": "dvc.removeExperimentsTableSorts",
+				"category": "DVC",
+				"icon": "$(close-all)"
+			},
+			{
+				"title": "%command.removeStudioAccessToken%",
+				"command": "dvc.removeStudioAccessToken",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.removeTarget%",
+				"command": "dvc.removeTarget",
+				"category": "DVC",
+				"icon": "$(trash)"
+			},
+			{
+				"title": "%command.renameTarget%",
+				"command": "dvc.renameTarget",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.runExperiment%",
+				"command": "dvc.runExperiment",
+				"category": "DVC",
+				"icon": "$(play)"
+			},
+			{
+				"title": "%command.resumeCheckpointExperiment%",
+				"command": "dvc.resumeCheckpointExperiment",
+				"category": "DVC",
+				"icon": "$(debug-continue-small)"
+			},
+			{
+				"title": "%command.startExperimentsQueue%",
+				"command": "dvc.startExperimentsQueue",
+				"category": "DVC",
+				"icon": "$(run-all)"
+			},
+			{
+				"title": "%command.stopExperimentsQueue%",
+				"command": "dvc.stopExperimentsQueue",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.stopQueuedExperiments%",
+				"command": "dvc.stopQueuedExperiments",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.resetAndRunCheckpointExperiment%",
+				"command": "dvc.resetAndRunCheckpointExperiment",
+				"category": "DVC",
+				"icon": "$(play)"
+			},
+			{
+				"title": "%command.selectForCompare%",
+				"command": "dvc.selectForCompare",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.selectFocusedProjects%",
+				"command": "dvc.selectFocusedProjects",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.setupWorkspace%",
+				"command": "dvc.setupWorkspace",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.shareExperimentAsBranch%",
+				"command": "dvc.shareExperimentAsBranch",
+				"category": "DVC",
+				"icon": "$(repo-push)"
+			},
+			{
+				"title": "%command.shareExperimentAsCommit%",
+				"command": "dvc.shareExperimentAsCommit",
+				"category": "DVC",
+				"icon": "$(repo-push)"
+			},
+			{
+				"title": "%command.showCommands",
+				"command": "dvc.showCommands",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.showConnect%",
+				"command": "dvc.showConnect",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.showExperiments%",
+				"command": "dvc.showExperiments",
+				"category": "DVC",
+				"icon": "$(beaker)"
+			},
+			{
+				"title": "%command.showOutput%",
+				"command": "dvc.showOutput",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.showPlots%",
+				"command": "dvc.showPlots",
+				"category": "DVC",
+				"icon": "$(graph-scatter)"
+			},
+			{
+				"title": "%command.showExperimentsAndPlots%",
+				"command": "dvc.showExperimentsAndPlots",
+				"category": "DVC"
+			},
+			{
+				"title": "%command.stopAllRunningExperiments%",
+				"command": "dvc.stopAllRunningExperiments",
+				"category": "DVC",
+				"icon": "$(debug-stop)"
+			},
+			{
+				"title": "%command.views.experimentsFilterByTree.removeAllFilters%",
+				"command": "dvc.views.experimentsFilterByTree.removeAllFilters",
+				"category": "DVC",
+				"icon": "$(close-all)"
+			},
+			{
+				"title": "%command.views.experimentsFilterByTree.removeFilter%",
+				"command": "dvc.views.experimentsFilterByTree.removeFilter",
+				"category": "DVC",
+				"icon": "$(close)"
+			},
+			{
+				"title": "%command.views.experimentsSortByTree.removeAllSorts%",
+				"command": "dvc.views.experimentsSortByTree.removeAllSorts",
+				"category": "DVC",
+				"icon": "$(close-all)"
+			},
+			{
+				"title": "%command.views.experimentsSortByTree.removeSort%",
+				"command": "dvc.views.experimentsSortByTree.removeSort",
+				"category": "DVC",
+				"icon": "$(close)"
+			},
+			{
+				"title": "%command.views.experiments.applyExperiment%",
+				"command": "dvc.views.experiments.applyExperiment",
+				"category": "DVC",
+				"icon": "$(merge)"
+			},
+			{
+				"title": "%command.views.experiments.branchExperiment%",
+				"command": "dvc.views.experiments.branchExperiment",
+				"category": "DVC",
+				"icon": "$(source-control)"
+			},
+			{
+				"title": "%command.views.experiments.queueExperiment%",
+				"command": "dvc.views.experiments.queueExperiment",
+				"category": "DVC",
+				"icon": {
+					"dark": "resources/dark/queue-experiment.svg",
+					"light": "resources/light/queue-experiment.svg"
+				}
+			},
+			{
+				"title": "%command.views.experiments.removeExperiment%",
+				"command": "dvc.views.experimentsTree.removeExperiment",
+				"category": "DVC",
+				"icon": "$(trash)"
+			},
+			{
+				"title": "%command.views.experiments.removeExperiment%",
+				"command": "dvc.views.experiments.removeExperiment",
+				"category": "DVC",
+				"icon": "$(trash)"
+			},
+			{
+				"title": "%command.views.experiments.runExperiment%",
+				"command": "dvc.views.experiments.runExperiment",
+				"category": "DVC",
+				"icon": "$(play)"
+			},
+			{
+				"title": "%command.views.experiments.resumeCheckpointExperiment%",
+				"command": "dvc.views.experiments.resumeCheckpointExperiment",
+				"category": "DVC",
+				"icon": "$(debug-continue-small)"
+			},
+			{
+				"title": "%command.views.experiments.resetAndRunCheckpointExperiment%",
+				"command": "dvc.views.experiments.resetAndRunCheckpointExperiment",
+				"category": "DVC",
+				"icon": "$(play)"
+			},
+			{
+				"title": "%command.views.experiments.shareExperimentAsBranch%",
+				"command": "dvc.views.experiments.shareExperimentAsBranch",
+				"category": "DVC",
+				"icon": "$(repo-push)"
+			},
+			{
+				"title": "%command.views.experiments.shareExperimentAsCommit%",
+				"command": "dvc.views.experiments.shareExperimentAsCommit",
+				"category": "DVC",
+				"icon": "$(repo-push)"
+			},
+			{
+				"title": "%command.views.experiments.shareExperimentToStudio%",
+				"command": "dvc.views.experiments.shareExperimentToStudio",
+				"category": "DVC",
+				"icon": "$(repo-push)"
+			},
+			{
+				"title": "%command.views.experimentsTree.selectExperiments%",
+				"command": "dvc.views.experimentsTree.selectExperiments",
+				"category": "DVC",
+				"icon": "$(list-filter)"
+			},
+			{
+				"title": "%command.views.experimentsColumnsTree.selectColumns%",
+				"command": "dvc.views.experimentsColumnsTree.selectColumns",
+				"category": "DVC",
+				"icon": "$(list-filter)"
+			},
+			{
+				"title": "%command.views.experimentsTree.autoApplyFilters%",
+				"command": "dvc.views.experimentsTree.autoApplyFilters",
+				"category": "DVC",
+				"icon": "$(filter)"
+			},
+			{
+				"title": "%command.views.experimentsTree.disableAutoApplyFilters%",
+				"command": "dvc.views.experimentsTree.disableAutoApplyFilters",
+				"category": "DVC",
+				"icon": "$(close)"
+			},
+			{
+				"title": "%command.views.plotsPathsTree.selectPlots%",
+				"command": "dvc.views.plotsPathsTree.selectPlots",
+				"category": "DVC",
+				"icon": "$(list-filter)"
+			},
+			{
+				"title": "%command.views.plotsPathsTree.refreshPlots%",
+				"command": "dvc.views.plotsPathsTree.refreshPlots",
+				"category": "DVC",
+				"icon": "$(refresh)"
+			}
+		],
+		"configuration": {
+			"title": "DVC",
+			"properties": {
+				"dvc.focusedProjects": {
+					"title": "%config.focusedProjects.title%",
+					"description": "%config.focusedProjects.description%",
+					"type": [
+						"string",
+						"array",
+						"null"
+					],
+					"default": null
+				},
+				"dvc.doNotRecommendRedHatExtension": {
+					"title": "%config.doNotRecommendRedHatExtension.title%",
+					"description": "%config.doNotRecommendRedHatExtension.description%",
+					"type": "boolean",
+					"default": null
+				},
+				"dvc.doNotShowCliUnavailable": {
+					"title": "%config.doNotShowCliUnavailable.title%",
+					"description": "%config.doNotShowCliUnavailable.description%",
+					"type": "boolean",
+					"default": null
+				},
+				"dvc.doNotShowWalkthroughAfterInstall": {
+					"title": "%config.doNotShowWalkthroughAfterInstall.title%",
+					"description": "%config.doNotShowWalkthroughAfterInstall.description%",
+					"type": "boolean",
+					"default": null
+				},
+				"dvc.doNotShowUnableToFilter": {
+					"title": "%config.doNotShowUnableToFilter.title%",
+					"description": "%config.doNotShowUnableToFilter.description%",
+					"type": "boolean",
+					"default": null
+				},
+				"dvc.dvcPath": {
+					"title": "%config.dvcPath.title%",
+					"description": "%config.dvcPath.description%",
+					"type": "string",
+					"default": null
+				},
+				"dvc.experimentsTableHeadMaxHeight": {
+					"title": "%config.experimentsTableHeadMaxHeight.title%",
+					"description": "%config.experimentsTableHeadMaxHeight.description%",
+					"type": "number",
+					"default": 5
+				},
+				"dvc.pythonPath": {
+					"title": "%config.pythonPath.title%",
+					"description": "%config.pythonPath.description%",
+					"type": "string",
+					"default": null
+				}
+			}
+		},
+		"languages": [
+			{
+				"id": "yaml",
+				"extensions": [
+					".dvc"
+				],
+				"filenames": [
+					"dvc.lock"
+				]
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "dvc.addExperimentsTableFilter",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.addExperimentsTableSort",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.addStarredExperimentsTableFilter",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.addStarredExperimentsTableSort",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.addStudioAccessToken",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.addTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.applyExperiment",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.branchExperiment",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.checkout",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.checkCLICompatible",
+					"when": "dvc.cli.incompatible"
+				},
+				{
+					"command": "dvc.checkoutTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.commit",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.commitTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.compareSelected",
+					"when": "false"
+				},
+				{
+					"command": "dvc.copyFilePath",
+					"when": "false"
+				},
+				{
+					"command": "dvc.copyRelativeFilePath",
+					"when": "false"
+				},
+				{
+					"command": "dvc.deleteTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.experimentGarbageCollect",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.findInFolder",
+					"when": "false"
+				},
+				{
+					"command": "dvc.gitStageAll",
+					"when": "false"
+				},
+				{
+					"command": "dvc.gitUnstageAll",
+					"when": "false"
+				},
+				{
+					"command": "dvc.init",
+					"when": "dvc.commands.available && !dvc.cli.incompatible && !dvc.project.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.moveTargets",
+					"when": "false"
+				},
+				{
+					"command": "dvc.openToTheSide",
+					"when": "false"
+				},
+				{
+					"command": "dvc.pull",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.pullTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.push",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.pushTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsAndQueue",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsAndRun",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running && !dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsAndResume",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsResetAndRun",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.queueExperiment",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.removeExperiments",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.removeExperimentQueue",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.removeExperimentsTableFilters",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.removeExperimentsTableSorts",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.removeStudioAccessToken",
+					"when": "dvc.commands.available && dvc.project.available && dvc.studio.connected"
+				},
+				{
+					"command": "dvc.removeTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.renameTarget",
+					"when": "false"
+				},
+				{
+					"command": "dvc.discardWorkspaceChanges",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.runExperiment",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running && !dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.resumeCheckpointExperiment",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.resetAndRunCheckpointExperiment",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.startExperimentsQueue",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.stopExperimentsQueue",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.stopQueuedExperiments",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.showConnect",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.studio.connected"
+				},
+				{
+					"command": "dvc.selectForCompare",
+					"when": "false"
+				},
+				{
+					"command": "dvc.selectFocusedProjects",
+					"when": "dvc.commands.available && dvc.project.available && dvc.multiple.projects"
+				},
+				{
+					"command": "dvc.showCommands",
+					"when": "false"
+				},
+				{
+					"command": "dvc.shareExperimentAsBranch",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.shareExperimentAsCommit",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.showExperiments",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.showPlots",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.showExperimentsAndPlots",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.stopAllRunningExperiments",
+					"when": "dvc.commands.available && dvc.project.available && dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experimentsColumnsTree.selectColumns",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.views.experiments.applyExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.branchExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.queueExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experimentsTree.removeExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.removeExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.runExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.resumeCheckpointExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.resetAndRunCheckpointExperiment",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.shareExperimentAsBranch",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.shareExperimentAsCommit",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experiments.shareExperimentToStudio",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experimentsFilterByTree.removeAllFilters",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experimentsFilterByTree.removeFilter",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experimentsSortByTree.removeAllSorts",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experimentsSortByTree.removeSort",
+					"when": "false"
+				},
+				{
+					"command": "dvc.views.experimentsTree.autoApplyFilters",
+					"when": "dvc.commands.available && dvc.project.available && !dvc.experiments.filter.selected"
+				},
+				{
+					"command": "dvc.views.experimentsTree.disableAutoApplyFilters",
+					"when": "dvc.commands.available && dvc.project.available && dvc.experiments.filter.selected"
+				},
+				{
+					"command": "dvc.views.experimentsTree.selectExperiments",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.views.plotsPathsTree.selectPlots",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"command": "dvc.views.plotsPathsTree.refreshPlots",
+					"when": "dvc.commands.available && dvc.project.available"
+				}
+			],
+			"scm/title": [
+				{
+					"command": "dvc.discardWorkspaceChanges",
+					"group": "navigation@1",
+					"when": "scmProvider == dvc && dvc.commands.available"
+				},
+				{
+					"command": "dvc.commit",
+					"group": "navigation@2",
+					"when": "scmProvider == dvc && dvc.commands.available"
+				},
+				{
+					"command": "dvc.pull",
+					"group": "navigation@3",
+					"when": "scmProvider == dvc && dvc.commands.available"
+				},
+				{
+					"command": "dvc.push",
+					"group": "navigation@4",
+					"when": "scmProvider == dvc && dvc.commands.available"
+				},
+				{
+					"command": "dvc.checkout",
+					"group": "1_DVC",
+					"when": "scmProvider == dvc && dvc.commands.available"
+				},
+				{
+					"command": "dvc.showOutput",
+					"group": "3_footer",
+					"when": "scmProvider == dvc"
+				}
+			],
+			"scm/resourceState/context": [
+				{
+					"command": "dvc.addTarget",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == untracked && dvc.commands.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.checkoutTarget",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == uncommitted && scmResourceState != uncommittedUnknown && scmResourceState != notInCache && dvc.commands.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.commitTarget",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == uncommitted && dvc.commands.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.pullTarget",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == notInCache && dvc.commands.available && !dvc.scm.command.running"
+				}
+			],
+			"scm/resourceGroup/context": [
+				{
+					"command": "dvc.checkout",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == uncommitted && dvc.commands.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.commit",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == uncommitted && dvc.commands.available && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.gitStageAll",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == committed"
+				},
+				{
+					"command": "dvc.gitUnstageAll",
+					"group": "inline",
+					"when": "scmProvider == dvc && scmResourceGroup == committed"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "dvc.runExperiment",
+					"group": "navigation@0",
+					"when": "dvc.params.file.active && !dvc.experiment.running && dvc.commands.available && !dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.runExperiment",
+					"group": "navigation@0",
+					"when": "dvc.experiments.webview.active && !dvc.experiment.running && dvc.commands.available && !dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.stopAllRunningExperiments",
+					"group": "navigation@0",
+					"when": "dvc.experiment.running && dvc.commands.available"
+				},
+				{
+					"command": "dvc.resetAndRunCheckpointExperiment",
+					"group": "navigation@1",
+					"when": "dvc.experiments.webview.active && !dvc.experiment.running && dvc.commands.available && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.resetAndRunCheckpointExperiment",
+					"group": "navigation@1",
+					"when": "dvc.params.file.active && !dvc.experiment.running && dvc.commands.available && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.resumeCheckpointExperiment",
+					"group": "navigation@2",
+					"when": "dvc.experiments.webview.active && !dvc.experiment.running && dvc.commands.available && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.resumeCheckpointExperiment",
+					"group": "navigation@2",
+					"when": "dvc.params.file.active && !dvc.experiment.running && dvc.commands.available && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.startExperimentsQueue",
+					"group": "navigation@3",
+					"when": "dvc.experiments.webview.active && !dvc.experiment.running && dvc.commands.available"
+				},
+				{
+					"command": "dvc.startExperimentsQueue",
+					"group": "navigation@3",
+					"when": "dvc.params.file.active && !dvc.experiment.running && dvc.commands.available"
+				},
+				{
+					"command": "dvc.queueExperiment",
+					"group": "navigation@4",
+					"when": "dvc.experiments.webview.active && !dvc.experiment.running && dvc.commands.available"
+				},
+				{
+					"command": "dvc.queueExperiment",
+					"group": "navigation@4",
+					"when": "dvc.params.file.active && !dvc.experiment.running && dvc.commands.available"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "dvc.openToTheSide",
+					"group": "navigation",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^file/"
+				},
+				{
+					"command": "dvc.moveTargets",
+					"group": "1_DVC@1",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^dirData$/ && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.pullTarget",
+					"group": "1_DVC@2",
+					"when": "view == dvc.views.trackedExplorerTree && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.pushTarget",
+					"group": "1_DVC@3",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem != virtual && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.compareSelected",
+					"group": "3_compare@1",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^file/ && resourceSelectedForCompare"
+				},
+				{
+					"command": "dvc.selectForCompare",
+					"group": "3_compare@2",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^file/"
+				},
+				{
+					"command": "dvc.findInFolder",
+					"group": "4_search",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^dir/"
+				},
+				{
+					"command": "dvc.copyFilePath",
+					"group": "6_copypath@1",
+					"when": "view == dvc.views.trackedExplorerTree"
+				},
+				{
+					"command": "dvc.copyRelativeFilePath",
+					"group": "6_copypath@2",
+					"when": "view == dvc.views.trackedExplorerTree"
+				},
+				{
+					"command": "dvc.renameTarget",
+					"group": "7_modification@1",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^.*Data$/"
+				},
+				{
+					"command": "dvc.deleteTarget",
+					"group": "7_modification@2",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem != virtual"
+				},
+				{
+					"command": "dvc.removeTarget",
+					"group": "7_modification@2",
+					"when": "view == dvc.views.trackedExplorerTree && viewItem =~ /^.*Data$/ && !dvc.scm.command.running"
+				},
+				{
+					"command": "dvc.views.experimentsSortByTree.removeSort",
+					"group": "inline",
+					"when": "view == dvc.views.experimentsSortByTree && dvc.commands.available && viewItem != dvcRoot"
+				},
+				{
+					"command": "dvc.views.experimentsFilterByTree.removeFilter",
+					"group": "inline",
+					"when": "view == dvc.views.experimentsFilterByTree && dvc.commands.available && viewItem != dvcRoot"
+				},
+				{
+					"command": "dvc.views.experiments.applyExperiment",
+					"group": "inline@1",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(checkpoint|experiment)$/ && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experiments.branchExperiment",
+					"group": "inline@2",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(checkpoint|experiment)$/ && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experimentsTree.removeExperiment",
+					"group": "inline@3",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(experiment|queued)$/ && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experiments.shareExperimentToStudio",
+					"group": "1_share@0",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem == experiment && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experiments.shareExperimentAsCommit",
+					"group": "1_share@1",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(checkpoint|experiment)$/ && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experiments.shareExperimentAsBranch",
+					"group": "1_share@2",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(checkpoint|experiment)$/ && !dvc.experiment.running"
+				},
+				{
+					"command": "dvc.views.experiments.runExperiment",
+					"group": "2_modify@1",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(workspace|commit|experiment|queued)$/ && !dvc.experiment.running && !dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.views.experiments.resetAndRunCheckpointExperiment",
+					"group": "2_modify@1",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(workspace|commit|experiment|queued)$/ && !dvc.experiment.running && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.views.experiments.resumeCheckpointExperiment",
+					"group": "2_modify@2",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(workspace|commit|experiment|queued)$/ && !dvc.experiment.running && dvc.experiment.checkpoints"
+				},
+				{
+					"command": "dvc.views.experiments.queueExperiment",
+					"group": "2_modify@3",
+					"when": "view == dvc.views.experimentsTree && dvc.commands.available && viewItem =~ /^(workspace|commit|experiment|queued)$/ && !dvc.experiment.running"
+				}
+			],
+			"view/title": [
+				{
+					"command": "dvc.pull",
+					"when": "view == dvc.views.trackedExplorerTree",
+					"group": "navigation@1"
+				},
+				{
+					"command": "dvc.push",
+					"when": "view == dvc.views.trackedExplorerTree",
+					"group": "navigation@2"
+				},
+				{
+					"command": "dvc.views.experimentsColumnsTree.selectColumns",
+					"when": "view == dvc.views.experimentsColumnsTree",
+					"group": "navigation@2"
+				},
+				{
+					"command": "dvc.runExperiment",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running && !dvc.experiment.checkpoints",
+					"group": "navigation@1"
+				},
+				{
+					"command": "dvc.resetAndRunCheckpointExperiment",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running && dvc.experiment.checkpoints",
+					"group": "navigation@1"
+				},
+				{
+					"command": "dvc.resumeCheckpointExperiment",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running && dvc.experiment.checkpoints",
+					"group": "navigation@2"
+				},
+				{
+					"command": "dvc.stopAllRunningExperiments",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiments.webview.active && dvc.experiment.running",
+					"group": "1_run@1"
+				},
+				{
+					"command": "dvc.stopAllRunningExperiments",
+					"when": "view == dvc.views.experimentsTree && dvc.experiments.webview.active && dvc.experiment.running",
+					"group": "navigation@1"
+				},
+				{
+					"command": "dvc.views.experimentsTree.selectExperiments",
+					"when": "view == dvc.views.experimentsTree && dvc.plots.webview.active",
+					"group": "navigation@3"
+				},
+				{
+					"command": "dvc.views.experimentsTree.autoApplyFilters",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiments.filter.selected",
+					"group": "navigation@4"
+				},
+				{
+					"command": "dvc.views.experimentsTree.disableAutoApplyFilters",
+					"when": "view == dvc.views.experimentsTree && dvc.experiments.filter.selected",
+					"group": "navigation@4"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsAndRun",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running && !dvc.experiment.checkpoints",
+					"group": "2_modify@1"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsAndResume",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running && dvc.experiment.checkpoints",
+					"group": "2_modify@1"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsResetAndRun",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running && dvc.experiment.checkpoints",
+					"group": "2_modify@2"
+				},
+				{
+					"command": "dvc.modifyExperimentParamsAndQueue",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running",
+					"group": "2_modify@3"
+				},
+				{
+					"command": "dvc.queueExperiment",
+					"when": "view == dvc.views.experimentsTree && !dvc.experiment.running",
+					"group": "3_queue@1"
+				},
+				{
+					"command": "dvc.startExperimentsQueue",
+					"when": "view == dvc.views.experimentsTree",
+					"group": "3_queue@2"
+				},
+				{
+					"command": "dvc.stopExperimentsQueue",
+					"when": "view == dvc.views.experimentsTree",
+					"group": "3_queue@3"
+				},
+				{
+					"command": "dvc.stopQueuedExperiments",
+					"when": "view == dvc.views.experimentsTree",
+					"group": "3_queue@5"
+				},
+				{
+					"command": "dvc.addExperimentsTableSort",
+					"when": "view == dvc.views.experimentsSortByTree",
+					"group": "navigation@1"
+				},
+				{
+					"command": "dvc.addStarredExperimentsTableSort",
+					"when": "view == dvc.views.experimentsSortByTree",
+					"group": "navigation@2"
+				},
+				{
+					"command": "dvc.views.experimentsSortByTree.removeAllSorts",
+					"when": "view == dvc.views.experimentsSortByTree && dvc.experiments.sorted",
+					"group": "navigation@3"
+				},
+				{
+					"command": "dvc.addExperimentsTableFilter",
+					"when": "view == dvc.views.experimentsFilterByTree",
+					"group": "navigation@1"
+				},
+				{
+					"command": "dvc.addStarredExperimentsTableFilter",
+					"when": "view == dvc.views.experimentsFilterByTree",
+					"group": "navigation@2"
+				},
+				{
+					"command": "dvc.views.experimentsFilterByTree.removeAllFilters",
+					"when": "view == dvc.views.experimentsFilterByTree && dvc.experiments.filtered",
+					"group": "navigation@3"
+				},
+				{
+					"command": "dvc.views.plotsPathsTree.selectPlots",
+					"when": "view == dvc.views.plotsPathsTree",
+					"group": "navigation@2"
+				},
+				{
+					"command": "dvc.views.plotsPathsTree.refreshPlots",
+					"when": "view == dvc.views.plotsPathsTree",
+					"group": "navigation@3"
+				}
+			]
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "dvc-views",
+					"title": "DVC",
+					"icon": "resources/dvc-monochrome.svg"
+				}
+			]
+		},
+		"views": {
+			"explorer": [
+				{
+					"id": "dvc.views.trackedExplorerTree",
+					"name": "DVC Tracked",
+					"when": "dvc.commands.available && dvc.project.available"
+				}
+			],
+			"dvc-views": [
+				{
+					"id": "dvc.views.welcome",
+					"name": "Welcome",
+					"when": "!dvc.commands.available || dvc.cli.incompatible || !dvc.project.available"
+				},
+				{
+					"id": "dvc.views.actions",
+					"name": "Actions",
+					"when": "true"
+				},
+				{
+					"id": "dvc.views.studio",
+					"name": "Studio",
+					"when": "!dvc.studio.connected"
+				},
+				{
+					"id": "dvc.views.experimentsColumnsTree",
+					"name": "Columns",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"id": "dvc.views.experimentsTree",
+					"name": "Experiments",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"id": "dvc.views.plotsPathsTree",
+					"name": "Plots",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"id": "dvc.views.experimentsSortByTree",
+					"name": "Sort By",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"id": "dvc.views.experimentsFilterByTree",
+					"name": "Filter By",
+					"when": "dvc.commands.available && dvc.project.available"
+				},
+				{
+					"id": "dvc.views.support",
+					"name": "Support"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "dvc.views.actions",
+				"contents": "[$(beaker) Show Experiments](command:dvc.showExperiments)\n[$(graph-scatter) Show Plots](command:dvc.showPlots)\n[$(play) Run Experiment](command:dvc.runExperiment)"
+			},
+			{
+				"view": "dvc.views.studio",
+				"contents": "[$(plug) Connect](command:dvc.showConnect)",
+				"when": "!dvc.studio.connected"
+			},
+			{
+				"view": "dvc.views.welcome",
+				"contents": "New to the extension?\n[Show Walkthrough](command:dvc.getStarted)\n\nThe extension is currently unable to initialize.\n[Show Setup](command:dvc.showSetup)",
+				"when": "true"
+			},
+			{
+				"view": "dvc.views.trackedExplorerTree",
+				"contents": "No Tracked Data to Display."
+			},
+			{
+				"view": "dvc.views.experimentsColumnsTree",
+				"contents": "No Columns to Display."
+			},
+			{
+				"view": "dvc.views.experimentsTree",
+				"contents": "No Experiments to Display."
+			},
+			{
+				"view": "dvc.views.plotsPathsTree",
+				"contents": "No Plots to Display."
+			},
+			{
+				"view": "dvc.views.experimentsSortByTree",
+				"contents": "No Sorts Applied. [Add Sort](command:dvc.addExperimentsTableSort)\n"
+			},
+			{
+				"view": "dvc.views.experimentsFilterByTree",
+				"contents": "No Filters Applied. [Add Filter](command:dvc.addExperimentsTableFilter)\n"
+			},
+			{
+				"view": "dvc.views.support",
+				"contents": "[$(github) Github Issues](https://github.com/iterative/vscode-dvc/issues)\n[$(comment-discussion) Discord](https://discord.gg/BGCjJHvDHt)",
+				"when": "true"
+			}
+		],
+		"walkthroughs": [
+			{
+				"id": "welcome",
+				"title": "Get Started",
+				"description": "Your first steps to build better models faster with experiment tracking and dataset versioning",
+				"steps": [
+					{
+						"id": "dvc.installDVC",
+						"title": "Install DVC",
+						"description": "This extension requires DVC to be installed.\n\n[Show Setup](command:dvc.showSetup)\n",
+						"media": {
+							"markdown": "resources/walkthrough/install-dvc.md"
+						},
+						"completionEvents": [
+							"onLink:https://dvc.org",
+							"onLink:https://dvc.org/doc/install",
+							"onCommand:dvc.setupWorkspace"
+						]
+					},
+					{
+						"id": "dvc.setupProject",
+						"title": "Setup a DVC Project",
+						"description": "Try an example DVC project or set one up quickly, and start tracking datasets, models, metrics, and plots\n\n[Example Project](https://github.com/iterative/example-get-started)\n",
+						"media": {
+							"markdown": "resources/walkthrough/setup-project.md"
+						},
+						"completionEvents": [
+							"onLink:https://github.com/iterative/example-get-started",
+							"onLink:https://github.com/iterative/vscode-dvc-demo",
+							"onLink:https://dvc.org/doc/dvclive"
+						]
+					},
+					{
+						"id": "dvc.showCommands",
+						"title": "Available Commands",
+						"description": "See all available commands.\n[View Commands](command:dvc.showCommands)",
+						"media": {
+							"markdown": "resources/walkthrough/command-palette.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.showCommands"
+						]
+					},
+					{
+						"id": "dvc.viewContainer",
+						"title": "Control from the Side Bar",
+						"description": "Use rich views to quickly access, control, or overview your experiments and plots.\n[Show Views](command:workbench.view.extension.dvc-views)",
+						"media": {
+							"markdown": "resources/walkthrough/view-container.md"
+						},
+						"completionEvents": [
+							"onCommand:workbench.view.extension.dvc-views"
+						]
+					},
+					{
+						"id": "dvc.experimentsTable",
+						"title": "Experiments Table",
+						"description": "Displays your experiments in a customizable table.\n[Show Table](command:dvc.showExperiments)",
+						"media": {
+							"markdown": "resources/walkthrough/experiments-table.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.showExperiments"
+						]
+					},
+					{
+						"id": "dvc.runExperiments",
+						"title": "Running Experiments",
+						"description": "Explore a few ways you can run or queue a new experiment.\n[Run an Experiment](command:dvc.modifyExperimentParamsAndRun)",
+						"media": {
+							"markdown": "resources/walkthrough/run-experiments.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.modifyExperimentParamsAndRun"
+						]
+					},
+					{
+						"id": "dvc.plots",
+						"title": "Plots Dashboard",
+						"description": "Visualize and compare multiple experiments with interactive customizable charts.\n[Show Plots](command:dvc.showPlots)",
+						"media": {
+							"markdown": "resources/walkthrough/plots.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.showPlots"
+						]
+					},
+					{
+						"id": "dvc.livePlots",
+						"title": "Live Plot Updates",
+						"description": "Run experiments and track how metrics and plots change in the same plots dashboard.\n[Show Plots](command:dvc.showPlots)",
+						"media": {
+							"markdown": "resources/walkthrough/live-plots.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.showPlots"
+						]
+					},
+					{
+						"id": "dvc.tracked",
+						"title": "Data and Model Management",
+						"description": "Navigate and manage datasets, models, and any large files that are tracked by DVC.\n[Show Tracked](command:dvc.views.trackedExplorerTree.focus)",
+						"media": {
+							"markdown": "resources/walkthrough/dvc-tracked-files.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.views.trackedExplorerTree.focus",
+							"onCommand:workbench.view.scm"
+						]
+					},
+					{
+						"id": "dvc.moreResources",
+						"title": "More Resources",
+						"description": "Learn more about this extension and DVC, and find other relevant materials.\n[DVC Docs](https://dvc.org/doc)",
+						"media": {
+							"markdown": "resources/walkthrough/more-resources.md"
+						},
+						"completionEvents": [
+							"onLink:https://dvc.org/doc"
+						]
+					},
+					{
+						"id": "dvc.troubleshoot",
+						"title": "Troubleshoot & Support",
+						"description": "We are here to help! Ping us and provide the DVC output channel logs.\n[View Output](command:dvc.showOutput)",
+						"media": {
+							"markdown": "resources/walkthrough/troubleshoot.md"
+						},
+						"completionEvents": [
+							"onCommand:dvc.showOutput"
+						]
+					}
+				]
+			}
+		]
+	},
+	"scripts": {
+		"format": "prettier --write '**/*.{js,json,jsx,md,scss,ts,tsx,yaml,yml}'",
+		"lint:prettier": "prettier -c '**/*.{js,json,jsx,md,scss,ts,tsx,yaml,yml}'",
+		"lint:eslint": "eslint --cache '**/*.{js,ts,jsx,tsx}'",
+		"lint:build": "tsc -p .",
+		"dev": "shx rm -rf dist && tsc -watch -p ./",
+		"build": "yarn webpack --mode production",
+		"package": "node ./scripts/ensureYarnLock.js && yarn run vsce package --yarn -o ./dvc.vsix",
+		"test-vscode": "node ./dist/test/runTest.js",
+		"test-e2e": "wdio run ./src/test/e2e/wdio.conf.ts",
+		"test": "jest --collect-coverage",
+		"cover-vscode-run": "node ./scripts/coverIntegrationTests.js",
+		"vscode:prepublish": ""
+	},
+	"dependencies": {
+		"@hediet/std": "0.6.0",
+		"@vscode/extension-telemetry": "0.7.5",
+		"appdirs": "1.1.0",
+		"execa": "5.1.1",
+		"fs-extra": "11.1.0",
+		"js-yaml": "4.1.0",
+		"json5": "2.2.3",
+		"lodash.clonedeep": "4.5.0",
+		"lodash.get": "4.4.2",
+		"lodash.isempty": "4.4.0",
+		"lodash.isequal": "4.5.0",
+		"lodash.merge": "4.6.2",
+		"lodash.omit": "4.5.0",
+		"node-fetch": "2.6.9",
+		"tree-kill": "1.2.2",
+		"uuid": "9.0.0",
+		"vscode-languageclient": "8.0.2"
+	},
+	"devDependencies": {
+		"@swc/core": "1.3.34",
+		"@swc/jest": "0.2.24",
+		"@types/chai": "4.3.4",
+		"@types/chai-as-promised": "7.1.5",
+		"@types/copy-webpack-plugin": "10.1.0",
+		"@types/fs-extra": "11.0.1",
+		"@types/jest": "29.4.0",
+		"@types/js-yaml": "4.0.5",
+		"@types/lodash.clonedeep": "4.5.7",
+		"@types/lodash.get": "4.4.7",
+		"@types/lodash.isempty": "4.4.7",
+		"@types/lodash.isequal": "4.5.6",
+		"@types/lodash.merge": "4.6.7",
+		"@types/lodash.omit": "4.5.7",
+		"@types/mocha": "10.0.1",
+		"@types/mock-require": "2.0.1",
+		"@types/node": "16.x",
+		"@types/react-vega": "7.0.0",
+		"@types/sinon-chai": "3.2.9",
+		"@types/uuid": "9.0.0",
+		"@types/vscode": "1.64.0",
+		"@vscode/test-electron": "2.2.3",
+		"@vscode/vsce": "2.17.0",
+		"@wdio/cli": "8.3.5",
+		"@wdio/local-runner": "8.3.5",
+		"@wdio/mocha-framework": "8.3.0",
+		"@wdio/spec-reporter": "8.3.0",
+		"chai": "4.3.7",
+		"chai-as-promised": "7.1.1",
+		"clean-webpack-plugin": "4.0.0",
+		"copy-webpack-plugin": "11.0.0",
+		"fork-ts-checker-webpack-plugin": "7.3.0",
+		"jest": "29.4.2",
+		"jest-environment-node": "29.4.2",
+		"lint-staged": "13.1.1",
+		"mocha": "10.2.0",
+		"mock-require": "3.0.3",
+		"process-exists": "4.1.0",
+		"shx": "0.3.4",
+		"sinon": "15.0.1",
+		"sinon-chai": "3.7.0",
+		"ts-loader": "9.4.2",
+		"vscode-uri": "3.0.7",
+		"wdio-vscode-service": "5.0.0",
+		"webdriverio": "8.3.5",
+		"webpack": "5.75.0",
+		"webpack-cli": "5.0.1"
+	},
+	"peerDependencies": {
+		"typescript": "*"
+	},
+	"__metadata": {
+		"id": "96c35fb6-adb8-4c1e-b953-4004af8451e8",
+		"publisherDisplayName": "Iterative",
+		"publisherId": "bc4dde4d-67b8-48bd-865c-7ee75e976429",
+		"isPreReleaseVersion": false,
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": true,
+		"installedTimestamp": 1676708699842,
+		"preRelease": false
+	}
+}

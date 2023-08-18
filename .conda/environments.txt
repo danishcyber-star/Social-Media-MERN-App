@@ -1,0 +1,15 @@
+C:\Users\dan7i\anaconda3
+C:\Users\danish\MLprojects\env
+C:\Users\dan7i\anaconda3\envs\MLprojects
+C:\Users\dan7i\anaconda3\envs\MLprojects1
+C:\Users\dan7i\anaconda3\envs\mLdL_cnn
+C:\Users\dan7i\anaconda3\envs\FSDS_NOV_deepCNNClassifier-main
+C:\Users\dan7i\Downloads\FSDS_NOV_deepCNNClassifier-main\env
+C:\Users\dan7i\anaconda3\envs\pythonProject1
+C:\Users\dan7i\anaconda3\envs\textsummarization_using_BART
+C:\Users\dan7i\anaconda3\envs\Abstractive-Text-Summarization_MP
+C:\Users\dan7i\anaconda3\envs\Data-Summarization_final - submit - final-new
+C:\Users\dan7i\anaconda3\envs\Data-Summarization_final-submit _run1
+C:\Users\dan7i\anaconda3\envs\pythonProject
+C:\Users\dan7i\anaconda3\envs\textsummarizationBART
+C:\Users\dan7i\anaconda3\envs\Data-Summarization_final-submit - final

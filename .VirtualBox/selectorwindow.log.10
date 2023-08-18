@@ -1,0 +1,37 @@
+00:00:00.617188 VirtualBox GUI VM Selector Window 7.0.2 r154219 win.amd64 (Oct 19 2022 21:29:26) release log
+00:00:00.617190 Log opened 2022-11-09T14:37:58.910063600Z
+00:00:00.617190 Build Type: release
+00:00:00.617193 OS Product: Windows 10
+00:00:00.617194 OS Release: 10.0.19044
+00:00:00.617194 OS Service Pack: 
+00:00:00.630823 DMI Product Name: VivoBook_ASUSLaptop X509FJ_X509FJ
+00:00:00.635365 DMI Product Version: 1.0       
+00:00:00.635386 Firmware type: UEFI
+00:00:00.635864 Secure Boot: VERR_PRIVILEGE_NOT_HELD
+00:00:00.635878 Host RAM: 8043MB (7.8GB) total, 2136MB (2.0GB) available
+00:00:00.635881 Executable: C:\Program Files\Oracle\VirtualBox\VirtualBox.exe
+00:00:00.635882 Process ID: 20432
+00:00:00.635882 Package type: WINDOWS_64BITS_GENERIC
+00:00:00.636048 Qt version: 5.15.2
+00:00:00.636918 GUI: UIMediumEnumerator: Initial medium-enumeration finished!
+00:00:00.660296 GUI: UIMediumEnumerator: Medium-enumeration started...
+00:00:03.032170 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:03:17.550775 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:03:38.196305 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:03:42.744546 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:27:58.285432 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:28:39.039886 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:28:43.476414 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:31:56.843574 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:32:57.446058 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:33:02.118617 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:35:13.138849 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:35:17.527599 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:35:18.256392 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:35:20.556791 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:35:28.916378 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:35:35.482441 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:36:50.770953 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:36:55.023987 GUI: UIMediumEnumerator: Medium-enumeration finished!
+01:09:20.507560 GUI: UICommon: Handling aboutToQuit request..
+01:09:20.508908 Log rotated - Log started 2022-11-09T14:37:58.910063600Z

@@ -1,0 +1,67 @@
+{
+  "Fori": {
+    "prefix": "fori",
+    "body": [
+      "for (let i=0; i< array.length; i++) {",
+      "\t$1",
+      "}"
+    ],
+    "description": "For Loop"
+  },
+  "Forin":{
+    "prefix":"forin",
+    "body": [
+      "for (const item in obj) {",
+        "if(obj.hasOwnProperty(item){",
+          "\t$0",
+        "}",
+      "}"
+    ]
+  },
+  "Forof": {
+    "prefix": "forof",
+    "body": [
+      "for (const item of obj) {",
+      "\t$1",
+      "}"
+    ],
+    "description": "For of Loop"
+  },
+  "Ife":{
+    "prefix": "ife",
+    "body": [
+      "if(reg){",
+        "\t$1",
+      "}else{",
+        "\t$0",
+      "}"
+    ]
+  },
+  "IsIOS":{
+    "prefix":"isios",
+    "body": [
+      "const isiOS = !!u.match(/\\(i[^;]+;( U;)? CPU.+Mac OS X/)"
+    ]
+  },
+  "IsAndroid":{
+    "prefix":"isand",
+    "body":[
+      "const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1"
+    ]
+  },
+  "axios": {
+    "prefix": "axios",
+    "body": [
+      "axios.post(",
+      "'',",
+      "params",
+      ")",
+      ".then(res => {",
+        "\t $0",
+      "})",
+      ".catch(e => {",
+        "\t",
+      "})"
+    ]
+  }
+}
